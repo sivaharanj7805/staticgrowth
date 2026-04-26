@@ -71,7 +71,7 @@ cve-bin-tool>=3.3
 # Layer 5 — SBOM Generation (Python library, NOT the .NET CLI)
 # ---------------------------------------------------------------------------
 aisbom-cli>=0.1.0
-cyclonedx-py>=4.0
+cyclonedx-bom>=4.0
 
 # ---------------------------------------------------------------------------
 # Build System
