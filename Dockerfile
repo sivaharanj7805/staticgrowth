@@ -43,6 +43,9 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 COPY api/requirements.txt /app/api/requirements.txt
 RUN pip install --no-cache-dir -r api/requirements.txt
 
+# Semgrep installed separately to avoid rich version conflict with snyk-agent-scan
+RUN pip install --no-cache-dir semgrep
+
 # ---------------------------------------------------------------------------
 # 3. Install non-Python CLI tools
 # ---------------------------------------------------------------------------
