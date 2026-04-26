@@ -1,0 +1,14 @@
+# Copy this file to terraform.tfvars and fill in your values
+# DO NOT commit terraform.tfvars to git — it contains secrets
+
+openai_api_key = "sk-your-openai-api-key-here"
+openai_model   = "gpt-4o"
+location       = "East US"
+vm_size        = "Standard_B2s"
+
+# Restrict API access to your IP only (recommended)
+# Find your IP: curl ifconfig.me
+# allowed_ip = "203.0.113.10/32"
+
+# Or allow from anywhere (less secure)
+allowed_ip = "*"

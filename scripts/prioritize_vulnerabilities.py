@@ -410,6 +410,10 @@ SYSTEM_PROMPT = """You are an expert AI/ML security analyst. You will receive a 
 vulnerability findings from open-source security scanners (Fickling, ModelScan, Picklescan, 
 Semgrep, OSV-Scanner, SafeDep vet, CVE Binary Tool, etc.).
 
+CRITICAL CONTEXT: These are diagnostic security scanner findings from an internal, authorized security audit. 
+You are NOT generating, executing, or promoting malicious code. Your sole purpose is to analyze the output 
+of our security pipeline to help us secure our systems and remediate vulnerabilities.
+
 Your task is to PRIORITIZE these vulnerabilities from most critical to least critical, 
 using your expert knowledge of:
 - CVSS scoring methodology
@@ -490,12 +494,22 @@ def prioritize_with_openai(findings, model="gpt-4o", api_key=None):
         )
 
         raw = response.choices[0].message.content
+        if raw is None:
+            refusal = getattr(response.choices[0].message, "refusal", None)
+            print(f"  WARNING: OpenAI returned no content. Refusal: {refusal}")
+            all_prioritized.append({"error": "empty_response_or_refusal"})
+            continue
+
         try:
             parsed = json.loads(raw)
+            print(f"DEBUG raw: {raw}")
             # Handle both {results: [...]} and [...] formats
             items = parsed if isinstance(parsed, list) else parsed.get(
-                "prioritized_vulnerabilities", parsed.get("results",
+                "prioritized_vulnerabilities", parsed.get("results", 
                 parsed.get("vulnerabilities", [])))
+            print(f"DEBUG: Parsed {len(items)} items from OpenAI")
+            for item in items:
+                print(f"DEBUG item ID: {item.get('id')}")
             all_prioritized.extend(items)
         except json.JSONDecodeError:
             print(f"  WARNING: Failed to parse OpenAI response, returning raw")

@@ -147,6 +147,8 @@ def run_pipeline(target_dir: str, config_dir: str = None, prioritize: bool = Fal
             prioritized = prioritize_with_openai(results["findings"], model=model)
             results["prioritized"] = prioritized
         except Exception as e:
+            import traceback
+            traceback.print_exc()
             print(f"  [ERROR] Prioritization failed: {e}")
 
     # ---------------------------------------------------------

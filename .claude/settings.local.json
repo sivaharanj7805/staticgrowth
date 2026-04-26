@@ -78,7 +78,20 @@
       "Bash(docker info:*)",
       "Bash(docker version:*)",
       "Bash(MSYS_NO_PATHCONV=1 terraform import azurerm_container_app.api /subscriptions/5c6145d4-cca6-4da7-ad6c-83db5c8698df/resourceGroups/rg-aisentinel-prod/providers/Microsoft.App/containerApps/ca-aisentinel-prod)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(az vm:*)",
+      "Bash(for region:*)",
+      "Bash(do echo:*)",
+      "Bash(done)",
+      "Bash(MSYS_NO_PATHCONV=1 terraform import azurerm_virtual_network.sentinel /subscriptions/5c6145d4-cca6-4da7-ad6c-83db5c8698df/resourceGroups/rg-ai-sentinel/providers/Microsoft.Network/virtualNetworks/vnet-ai-sentinel)",
+      "Bash(MSYS_NO_PATHCONV=1 terraform import azurerm_network_security_group.sentinel /subscriptions/5c6145d4-cca6-4da7-ad6c-83db5c8698df/resourceGroups/rg-ai-sentinel/providers/Microsoft.Network/networkSecurityGroups/nsg-ai-sentinel)",
+      "Bash(rm -f terraform.tfstate terraform.tfstate.backup tfplan .terraform.lock.hcl)",
+      "Bash(rm -rf .terraform)",
+      "Bash(while az:*)",
+      "Bash(do sleep:*)",
+      "Bash(MSYS_NO_PATHCONV=1 az vm run-command invoke --resource-group rg-ai-sentinel --name vm-ai-sentinel --command-id RunShellScript --scripts \"docker rm -f ai-sentinel 2>/dev/null; rm -rf /opt/ai-sentinel; git clone -b claude/ai-sentinel-blueprint-IHkuq https://github.com/sivaharanj7805/staticgrowth.git /opt/ai-sentinel && cd /opt/ai-sentinel && docker build -t ai-sentinel:latest . 2>&1 | tail -20\")",
+      "Bash(MSYS_NO_PATHCONV=1 az vm run-command invoke --resource-group rg-ai-sentinel --name vm-ai-sentinel --command-id RunShellScript --scripts \"rm -rf /opt/ai-sentinel && git clone -b claude/ai-sentinel-blueprint-IHkuq https://github.com/sivaharanj7805/staticgrowth.git /opt/ai-sentinel && cd /opt/ai-sentinel && docker build -t ai-sentinel:latest . 2>&1 | tail -30\")",
+      "Bash(MSYS_NO_PATHCONV=1 az vm run-command invoke --resource-group rg-ai-sentinel --name vm-ai-sentinel --command-id RunShellScript --scripts \"docker images ai-sentinel 2>/dev/null && echo ''---STATUS---'' && docker ps -a 2>/dev/null\")"
     ]
   }
 }
